@@ -23,6 +23,7 @@ class Drawing extends Phaser.Scene {
 	/** @returns {void} */
 	editorCreate() {
 
+
 		this.events.emit("scene-awake");
 	}
 
@@ -33,7 +34,7 @@ class Drawing extends Phaser.Scene {
 	preload()
 	{
 		//this.load.image('brush', 'assets/images/brush5.png');
-		//this.load.image('bg1', 'assets/images/gradient4.png');
+		this.load.image('bg1', 'assets/images/gradient4.png');
 		this.load.image('dp', 'assets/images/gradient-palettes.png');
 		this.load.plugin(
 			'rexsliderplugin',
@@ -43,6 +44,15 @@ class Drawing extends Phaser.Scene {
 
 	create()
 	{
+		/*
+		const blue_button05 = this.add.image(108, 560, "blue_button05").setOrigin(0).setDepth(1000);
+		blue_button05.scaleX = 0.7356947202832798;
+		blue_button05.scaleY = 0.5864405390547005;
+		blue_button05.setInteractive();
+		blue_button05.on(Phaser.Input.Events.GAMEOBJECT_POINTER_UP,this.clickMainMenu, this)
+		 */
+		
+		var canvasDraw = this.add.image(0, 0, 'bg1').setOrigin(0);
 		var green_button01 = this.add.image(123, 35, "green_button01");
 		this.editorCreate();
 
@@ -64,20 +74,22 @@ class Drawing extends Phaser.Scene {
 		green_button01.setDepth(1000);
 		var swatch = this.add.image(600, 0, 'dp').setOrigin(0).setDepth(1000);
 		swatch.setInteractive();
-				
+
 		swatch.on("pointerdown", this.changeColor, this);
 		swatch.on("pointermove", this.updateColor, this);
 
-		this.input.on('pointerdown', function (pointer) {
+		canvasDraw.setInteractive();
+		canvasDraw.on('pointerdown', function (pointer)
+		{
 			lastPosition.x = pointer.x;
 			lastPosition.y = pointer.y;
-			firstPosition.x = pointer.y;
+			firstPosition.x = pointer.x;
 			firstPosition.y = pointer.y;
 			curve = new Phaser.Curves.Spline([pointer.x, pointer.y]);
 			curves.push(curve);
 		}, this);
 
-		this.input.on('pointermove', function (pointer) {
+		canvasDraw.on('pointermove', function (pointer) {
 			if(pointer.isDown)
 			{
 				var x = pointer.x;
@@ -96,39 +108,27 @@ class Drawing extends Phaser.Scene {
 			}
 		},this);
 
-		this.input.on('pointerup', function (pointer) {
+		canvasDraw.on('pointerup', function (pointer) {
+			if(Phaser.Math.Distance.Between(pointer.x,pointer.y, firstPosition.x, firstPosition.y) > distance)
+			{
+				var line = new Phaser.Curves.Line(new Phaser.Math.Vector2(pointer.x,pointer.y), firstPosition);
+				graphics.lineStyle(size * 1.5, brushcolor);
+				line.draw(graphics,64)
+			}
 			graphics.save();
 			curves = [];
 			curve = null;
 		},this);
-		/*
-		//Add the Background
-		this.add.image(0, 0, 'bg1').setOrigin(0);
-
-		//Set the invinsible render texture to draw on it
-		var rt = this.add.renderTexture(0, 0, 600, 600);
-
-		//The draw mechanic itself
-		this.input.on('pointermove', function (pointer) {
-
-			if (pointer.isDown)
-			{
-				//Important note: the way the draw gets the color is different.
-				//for example: it get values like 0xffffff (red),
-				//With the way it's now, it gives an inaccurate color
-				//There has to be a conversion
-
-				rt.draw('brush', pointer.x - 4, pointer.y - 4, 1, color.color32);
-			}
-
-		}, this);
-		*/
-
 	}
 
 	update()
 	{
 
+	}
+
+	clickMainMenu()
+	{
+		this.scene.start("Menu");
 	}
 
 	changeColor(pointer, x, y, event)

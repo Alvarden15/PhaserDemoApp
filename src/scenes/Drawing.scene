@@ -6,7 +6,21 @@
         "createMethodName": "editorCreate",
         "sceneKey": "Drawing"
     },
-    "displayList": [],
+    "displayList": [
+        {
+            "type": "Image",
+            "id": "952bd674-847e-40cf-97dc-525cc07f611d",
+            "label": "blue_button05",
+            "components": [],
+            "texture": {
+                "key": "blue_button05"
+            },
+            "x": 108,
+            "y": 560,
+            "scaleX": 0.7356947202832798,
+            "scaleY": 0.5864405390547005
+        }
+    ],
     "plainObjects": [],
     "meta": {
         "app": "Phaser Editor 2D - Scene Editor",
