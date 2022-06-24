@@ -3,9 +3,9 @@
 var swatchData;
 var curves = [];
 var curve = null;
-var size = 1;
+var size = 1.5;
 var graphics;
-var brushcolor = "#000000";
+var brushcolor = "0x000000";
 var backgroundcolor = "#ffffff";
 var color = new Phaser.Display.Color();
 /* START OF COMPILED CODE */
@@ -35,6 +35,10 @@ class Drawing extends Phaser.Scene {
 		//this.load.image('brush', 'assets/images/brush5.png');
 		//this.load.image('bg1', 'assets/images/gradient4.png');
 		this.load.image('dp', 'assets/images/gradient-palettes.png');
+		this.load.plugin(
+			'rexsliderplugin',
+			'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexsliderplugin.min.js',
+			true);
 	}
 
 	create()
@@ -44,7 +48,7 @@ class Drawing extends Phaser.Scene {
 
 		var distance = size;
 		var lastPosition = new Phaser.Math.Vector2();
-
+		var firstPosition = new Phaser.Math.Vector2();
 		var current = null;
 		var previous = null;
 		green_button01.setInteractive()
@@ -67,6 +71,8 @@ class Drawing extends Phaser.Scene {
 		this.input.on('pointerdown', function (pointer) {
 			lastPosition.x = pointer.x;
 			lastPosition.y = pointer.y;
+			firstPosition.x = pointer.y;
+			firstPosition.y = pointer.y;
 			curve = new Phaser.Curves.Spline([pointer.x, pointer.y]);
 			curves.push(curve);
 		}, this);
@@ -82,9 +88,9 @@ class Drawing extends Phaser.Scene {
 					lastPosition.y = pointer.y;
 					previous = current;
 					curve.addPoint(x,y);
-					graphics.lineStyle(size * 1.5, Phaser.Display.Color.RGBToString(color.red, color.green, color.blue, color.alpha).replace("#","0x"));
+					graphics.lineStyle(size * 1.5, brushcolor);
 					curves.forEach(function(c){
-						c.draw(graphics, 512);
+						c.draw(graphics, 64);
 					});
 				}
 			}
@@ -129,7 +135,7 @@ class Drawing extends Phaser.Scene {
 	{
 		swatchData.getPixel(x, y, color)
 		console.log("Color: " + Phaser.Display.Color.RGBToString(color.red, color.green, color.blue, color.alpha));
-
+		brushcolor = Phaser.Display.Color.RGBToString(color.red, color.green, color.blue, color.alpha).replace("#","0x");
 		event.stopPropagation();
 	}
 
@@ -140,12 +146,19 @@ class Drawing extends Phaser.Scene {
 		}
 
 		swatchData.getPixel(x, y, color);
+		brushcolor = Phaser.Display.Color.RGBToString(color.red, color.green, color.blue, color.alpha).replace("#","0x");
 		event.stopPropagation();
 	}
 
 	clearCanvas()
 	{
 		graphics.clear();
+	}
+
+	changeBrushSize()
+	{
+		var brushsize = 2;
+		size = brushsize;
 	}
 	/* END-USER-CODE */
 }
