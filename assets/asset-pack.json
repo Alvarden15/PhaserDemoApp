@@ -2,9 +2,36 @@
     "section1": {
         "files": [
             {
+                "url": "assets/images/blue_button05.png",
+                "type": "image",
+                "key": "blue_button05"
+            },
+            {
                 "url": "assets/dino.png",
                 "key": "dino",
                 "type": "image"
+            },
+            {
+                "url": "assets/images/green_button01.png",
+                "type": "image",
+                "key": "green_button01"
+            },
+            {
+                "url": "assets/images/green_panel.png",
+                "type": "image",
+                "key": "green_panel"
+            },
+            {
+                "url": "assets/images/PlayerImage.png",
+                "type": "image",
+                "key": "PlayerImage"
+            },
+            {
+                "url": [
+                    "assets/PlayerPrefab.js"
+                ],
+                "type": "scripts",
+                "key": "PlayerPrefab"
             }
         ]
     },
@@ -12,6 +39,7 @@
         "app": "Phaser Editor 2D - Asset Pack Editor",
         "contentType": "phasereditor2d.pack.core.AssetContentType",
         "url": "https://phasereditor2d.com",
-        "version": 2
+        "version": 2,
+        "showAllFilesInBlocks": false
     }
 }

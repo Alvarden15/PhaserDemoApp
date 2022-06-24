@@ -1,0 +1,28 @@
+{
+    "id": "15c5d0ce-976d-4a37-b562-2485f10b6685",
+    "sceneType": "SCENE",
+    "settings": {
+        "preloadPackFiles": [],
+        "createMethodName": "editorCreate",
+        "sceneKey": "Menu"
+    },
+    "displayList": [
+        {
+            "type": "Text",
+            "id": "9e077bb0-9af3-4f69-b48e-0c81e77b9c69",
+            "label": "text_1",
+            "components": [],
+            "x": 296,
+            "y": 90,
+            "text": "Game Demo",
+            "fontSize": "48px"
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 3
+    }
+}
