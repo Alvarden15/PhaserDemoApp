@@ -8,6 +8,9 @@ var graphics;
 var brushcolor = "0x000000";
 var backgroundcolor = "#ffffff";
 var color = new Phaser.Display.Color();
+var index = 0;
+var listGuides = []
+
 /* START OF COMPILED CODE */
 
 class Drawing extends Phaser.Scene {
@@ -23,6 +26,9 @@ class Drawing extends Phaser.Scene {
 	/** @returns {void} */
 	editorCreate() {
 
+		// Reset
+		const reset = this.add.text(91, 27, "", {}).setDepth(1000);
+		reset.text = "Reset";
 
 		this.events.emit("scene-awake");
 	}
@@ -34,7 +40,7 @@ class Drawing extends Phaser.Scene {
 	preload()
 	{
 		//this.load.image('brush', 'assets/images/brush5.png');
-		this.load.image('bg1', 'assets/images/gradient4.png');
+
 		this.load.image('dp', 'assets/images/gradient-palettes.png');
 		this.load.plugin(
 			'rexsliderplugin',
@@ -51,8 +57,8 @@ class Drawing extends Phaser.Scene {
 		blue_button05.setInteractive();
 		blue_button05.on(Phaser.Input.Events.GAMEOBJECT_POINTER_UP,this.clickMainMenu, this)
 		 */
-		
-		var canvasDraw = this.add.image(0, 0, 'bg1').setOrigin(0);
+
+		var canvasDraw = this.add.image(0, 0, "gradient4-alt").setOrigin(0);
 		var green_button01 = this.add.image(123, 35, "green_button01");
 		this.editorCreate();
 
@@ -74,7 +80,33 @@ class Drawing extends Phaser.Scene {
 		green_button01.setDepth(1000);
 		var swatch = this.add.image(600, 0, 'dp').setOrigin(0).setDepth(1000);
 		swatch.setInteractive();
+		// ovalo
+		var ovalo = this.add.image(266, 117, "Ovalo");
+		ovalo.scaleX = 0.7429615822519451;
+		ovalo.active = false;
+		// rombo
+		var rombo = this.add.image(268, 330, "Rombo");
+		rombo.scaleX = 0.7726206485913092;
+		rombo.scaleY = 0.7258090510760751;
+		rombo.angle = -90;
+		// triangulo
+		var triangulo = this.add.image(390, 294, "Triangulo");
+		triangulo.scaleX = 0.45634591424237547;
+		triangulo.angle = -32.00000000000006;
+		// triangulo_1
+		var triangulo_1 = this.add.image(158, 285, "Triangulo");
+		triangulo_1.scaleX = 0.45634591424237547;
+		triangulo_1.angle = 32;
+		listGuides = [ovalo, rombo, triangulo, triangulo_1]
+		/*
+		listGuides.forEach(function(c)
+		{
+			c.setVisible(false);
+		})
+		listGuides[0].setVisible(true);
+		 */
 
+		restartGuide()
 		swatch.on("pointerdown", this.changeColor, this);
 		swatch.on("pointermove", this.updateColor, this);
 
@@ -115,10 +147,22 @@ class Drawing extends Phaser.Scene {
 				graphics.lineStyle(size * 1.5, brushcolor);
 				line.draw(graphics,64)
 			}
+			/*
+			curves.forEach(function(c){
+				graphics.fillPoints(c.getPoints())
+				//c.draw(graphics, 64);
+			});
+			 */
+
+			//var polygon = this.add.polygon(curve);
+			//var shape = this.add.shape(this,"Polygon",curve);
 			graphics.save();
 			curves = [];
 			curve = null;
+			updateSpriteGuide();
 		},this);
+
+
 	}
 
 	update()
@@ -130,6 +174,9 @@ class Drawing extends Phaser.Scene {
 	{
 		this.scene.start("Menu");
 	}
+
+	//TODO: make it a pool.
+
 
 	changeColor(pointer, x, y, event)
 	{
@@ -153,6 +200,7 @@ class Drawing extends Phaser.Scene {
 	clearCanvas()
 	{
 		graphics.clear();
+		restartGuide();
 	}
 
 	changeBrushSize()
@@ -166,3 +214,31 @@ class Drawing extends Phaser.Scene {
 /* END OF COMPILED CODE */
 
 // You can write more code here
+function updateSpriteGuide()
+{
+	//Starts with the 0
+	if(index < 4)
+	{
+		listGuides[index].setVisible(false);
+		index++;
+	}
+	if(index < 4)
+	{
+		listGuides[index].setVisible(true);
+	}
+}
+
+function setGuides()
+{
+
+}
+
+function restartGuide()
+{
+	listGuides.forEach(function(c)
+	{
+		c.setVisible(false);
+	})
+	listGuides[0].setVisible(true);
+	index = 0;
+}

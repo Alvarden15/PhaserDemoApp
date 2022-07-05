@@ -8,17 +8,13 @@
     },
     "displayList": [
         {
-            "type": "Image",
-            "id": "952bd674-847e-40cf-97dc-525cc07f611d",
-            "label": "blue_button05",
+            "type": "Text",
+            "id": "da1715d8-e441-4886-a7f6-297084721d4c",
+            "label": "Reset",
             "components": [],
-            "texture": {
-                "key": "blue_button05"
-            },
-            "x": 108,
-            "y": 560,
-            "scaleX": 0.7356947202832798,
-            "scaleY": 0.5864405390547005
+            "x": 91,
+            "y": 27,
+            "text": "Reset"
         }
     ],
     "plainObjects": [],

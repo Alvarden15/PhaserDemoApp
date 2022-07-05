@@ -20,7 +20,9 @@ window.addEventListener('load', function () {
 				},
 				debug: false
 			}
-		}
+		},
+		antialias: false,
+		antialiasGL: false
 	});
 	
 	game.scene.add("Preload", Preload);

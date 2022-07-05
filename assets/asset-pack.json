@@ -7,9 +7,29 @@
                 "key": "blue_button05"
             },
             {
+                "url": "assets/guides/Cuadrado.png",
+                "type": "image",
+                "key": "Cuadrado"
+            },
+            {
                 "url": "assets/dino.png",
                 "key": "dino",
                 "type": "image"
+            },
+            {
+                "url": "assets/guides/Estrella.png",
+                "type": "image",
+                "key": "Estrella"
+            },
+            {
+                "url": "assets/images/gradient-palettes-copy.png",
+                "type": "image",
+                "key": "gradient-palettes-copy"
+            },
+            {
+                "url": "assets/images/gradient4-alt.png",
+                "type": "image",
+                "key": "gradient4-alt"
             },
             {
                 "url": "assets/images/green_button01.png",
@@ -22,6 +42,11 @@
                 "key": "green_panel"
             },
             {
+                "url": "assets/guides/Ovalo.png",
+                "type": "image",
+                "key": "Ovalo"
+            },
+            {
                 "url": "assets/images/PlayerImage.png",
                 "type": "image",
                 "key": "PlayerImage"
@@ -32,6 +57,16 @@
                 ],
                 "type": "scripts",
                 "key": "PlayerPrefab"
+            },
+            {
+                "url": "assets/guides/Rombo.png",
+                "type": "image",
+                "key": "Rombo"
+            },
+            {
+                "url": "assets/guides/Triangulo.png",
+                "type": "image",
+                "key": "Triangulo"
             }
         ]
     },
