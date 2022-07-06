@@ -157,10 +157,9 @@ class Drawing extends Phaser.Scene {
 			graphics.save();
 			curves = [];
 			curve = null;
+			graphics.clear();
 			updateSpriteGuide();
 		},this);
-
-
 	}
 
 	update()
