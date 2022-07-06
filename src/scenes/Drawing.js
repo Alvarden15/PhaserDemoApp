@@ -10,7 +10,7 @@ var backgroundcolor = "#ffffff";
 var color = new Phaser.Display.Color();
 var index = 0;
 var listGuides = []
-
+var polygonsGenerated = []
 /* START OF COMPILED CODE */
 
 class Drawing extends Phaser.Scene {
@@ -147,15 +147,13 @@ class Drawing extends Phaser.Scene {
 				graphics.lineStyle(size * 1.5, brushcolor);
 				line.draw(graphics,64)
 			}
-			/*
-			curves.forEach(function(c){
-				graphics.fillPoints(c.getPoints())
-				//c.draw(graphics, 64);
-			});
-			 */
+			//TODO: Haz que el poligono se alinea bien con la posicion del dibujado.
+			//Y que cuando pulses el boton de reiniciar, desaparezcan los poligonos generados.
 
-			//var polygon = this.add.polygon(curve);
-			//var shape = this.add.shape(this,"Polygon",curve);
+			var polygonPoints = [];
+			var points = curve.getPoints(64,1,polygonPoints);
+			var polygon = this.add.polygon(0,0,polygonPoints,brushcolor);
+			polygonsGenerated.push(polygon);
 			graphics.save();
 			curves = [];
 			curve = null;
@@ -174,9 +172,6 @@ class Drawing extends Phaser.Scene {
 	{
 		this.scene.start("Menu");
 	}
-
-	//TODO: make it a pool.
-
 
 	changeColor(pointer, x, y, event)
 	{
@@ -201,6 +196,7 @@ class Drawing extends Phaser.Scene {
 	{
 		graphics.clear();
 		restartGuide();
+		restartPolygons();
 	}
 
 	changeBrushSize()
@@ -228,11 +224,6 @@ function updateSpriteGuide()
 	}
 }
 
-function setGuides()
-{
-
-}
-
 function restartGuide()
 {
 	listGuides.forEach(function(c)
@@ -241,4 +232,16 @@ function restartGuide()
 	})
 	listGuides[0].setVisible(true);
 	index = 0;
+}
+
+function restartPolygons()
+{
+	if(polygonsGenerated.length > 0)
+	{
+		polygonsGenerated.forEach(function(c)
+		{
+			c.destroy();
+		});
+		polygonsGenerated = [];
+	}
 }
