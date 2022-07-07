@@ -147,12 +147,11 @@ class Drawing extends Phaser.Scene {
 				graphics.lineStyle(size * 1.5, brushcolor);
 				line.draw(graphics,64)
 			}
-			//TODO: Haz que el poligono se alinea bien con la posicion del dibujado.
-			//Y que cuando pulses el boton de reiniciar, desaparezcan los poligonos generados.
 
 			var polygonPoints = [];
 			var points = curve.getPoints(64,1,polygonPoints);
-			var polygon = this.add.polygon(0,0,polygonPoints,brushcolor);
+			var polygon = this.add.polygon(0,0,polygonPoints,brushcolor).setOrigin(0);
+			//console.log("Posicion Poligono: "+polygon.originX, polygon.originY)
 			polygonsGenerated.push(polygon);
 			graphics.save();
 			curves = [];
@@ -175,7 +174,7 @@ class Drawing extends Phaser.Scene {
 	changeColor(pointer, x, y, event)
 	{
 		swatchData.getPixel(x, y, color)
-		console.log("Color: " + Phaser.Display.Color.RGBToString(color.red, color.green, color.blue, color.alpha));
+		//console.log("Color: " + Phaser.Display.Color.RGBToString(color.red, color.green, color.blue, color.alpha));
 		brushcolor = Phaser.Display.Color.RGBToString(color.red, color.green, color.blue, color.alpha).replace("#","0x");
 		event.stopPropagation();
 	}
