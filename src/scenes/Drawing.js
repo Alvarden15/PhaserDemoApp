@@ -150,7 +150,8 @@ class Drawing extends Phaser.Scene {
 
 			var polygonPoints = [];
 			var points = curve.getPoints(64,1,polygonPoints);
-			var polygon = this.add.polygon(0,0,polygonPoints,brushcolor).setOrigin(0);
+			var polygon = this.add.polygon(0,0,polygonPoints,"0xfdffe8").setOrigin(0);
+			polygon.setStrokeStyle( 5, brushcolor ,1);
 			//console.log("Posicion Poligono: "+polygon.originX, polygon.originY)
 			polygonsGenerated.push(polygon);
 			graphics.save();
