@@ -72,7 +72,7 @@ class Drawing extends Phaser.Scene {
 			 this.clearCanvas,
 			 this);
 		graphics = this.add.graphics();
-
+		graphics.setDepth(1100);
 		//Preparing the color pallete
 		var src = this.textures.get('dp').getSourceImage();
 		swatchData = this.textures.createCanvas('swatch', src.width, src.height);
